@@ -94,16 +94,24 @@ input, select { font: inherit; padding: .65rem .8rem; border-radius: 12px; borde
 
 /* Detalle */
 .detail { display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem; align-items: start; }
+/* min-width: 0 evita que el contenido del grid empuje la página fuera de la pantalla en móvil. */
+.detail > * { min-width: 0; }
 .detail-info { background: var(--warm); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; position: sticky; top: 84px; }
 .detail-actions { margin-top: 1.2rem; display: flex; gap: .7rem; flex-wrap: wrap; }
 .breadcrumb { margin: 0 0 1rem; }
+.back-link { display: inline-flex; align-items: center; gap: .45rem; padding: .45rem 1rem .45rem .55rem; border: 1.5px solid var(--line); background: var(--warm); border-radius: 999px; text-decoration: none; color: var(--dark); font-weight: 600; font-size: .92rem; box-shadow: var(--shadow); transition: background .15s, transform .1s; }
+.back-link:hover { background: var(--cream); }
+.back-link:active { transform: scale(.98); }
+.back-link svg { display: block; width: 18px; height: 18px; flex: none; }
 .label { margin: 0 0 .4rem; }
 .swatch-row { display: flex; gap: .6rem; flex-wrap: wrap; }
 .swatch-btn { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--warm); box-shadow: 0 0 0 1px var(--line); cursor: pointer; }
 .swatch-btn.active { box-shadow: 0 0 0 3px var(--dark); }
 
 /* Visor */
-.viewer-stage { position: relative; background: radial-gradient(circle at 50% 35%, #fff, #ece5d6); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3.2; min-height: 320px; }
+/* Nota: el min-height solo aplica en escritorio. En móvil, combinarlo con aspect-ratio
+   imponía un ancho mínimo de 400px y hacía que la página se desbordara de lado. */
+.viewer-stage { position: relative; background: radial-gradient(circle at 50% 35%, #fff, #ece5d6); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3.2; }
 model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: transparent; }
 .viewer-loading { position: absolute; inset: auto 0 0 0; padding: 1rem; text-align: center; background: linear-gradient(transparent, rgba(247, 243, 236, .95)); }
 .viewer-loading p { margin: .3rem 0 0; font-size: .85rem; color: var(--muted); }
@@ -135,6 +143,9 @@ model-viewer { width: 100%; height: 100%; --poster-color: transparent; backgroun
 .site-footer { border-top: 1px solid var(--line); background: var(--warm); padding: 1.5rem 0; margin-top: 2rem; text-align: center; }
 .site-footer p { margin: .2rem 0; }
 
+@media (min-width: 861px) {
+  .viewer-stage { min-height: 340px; }
+}
 @media (max-width: 860px) {
   .hero-grid, .detail, .two-col, .steps { grid-template-columns: 1fr; }
   .detail-info { position: static; }

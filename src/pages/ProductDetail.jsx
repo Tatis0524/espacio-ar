@@ -31,7 +31,14 @@ export default function ProductDetail() {
 
   return (
     <section className="container section">
-      <p className="breadcrumb"><Link to="/catalogo">← Catálogo</Link></p>
+      <p className="breadcrumb">
+        <Link to="/catalogo" className="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+          Volver al catálogo
+        </Link>
+      </p>
       <div className="detail">
         <div>
           {product.model ? (

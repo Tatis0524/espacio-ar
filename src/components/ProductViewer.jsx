@@ -76,6 +76,14 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
     }
   }, [status]);
 
+  // Devuelve la cámara a su posición inicial por si el usuario la aleja o se sale de cuadro.
+  const resetView = () => {
+    const el = ref.current;
+    if (!el || status !== 'ready') return;
+    el.cameraOrbit = 'auto auto auto';
+    el.cameraTarget = 'auto auto auto';
+  };
+
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -105,11 +113,13 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
             alt={alt}
             ar
             ar-modes="webxr scene-viewer quick-look"
-            ar-scale="auto"
+            ar-scale="fixed"
             ar-placement={arPlacement}
             camera-controls
             touch-action="pan-y"
             auto-rotate
+            min-camera-orbit="auto auto 70%"
+            max-camera-orbit="auto auto 140%"
             shadow-intensity="1"
             exposure="1"
             interaction-prompt="auto"
@@ -129,7 +139,7 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
       {label && <p className="viewer-label">{label}</p>}
 
       <p className="viewer-help small muted">
-        Arrastra para rotar · pellizca o usa la rueda del mouse para acercar · dos dedos para mover.
+        Arrastra para rotar · pellizca para acercar o alejar · dos dedos para mover. Si el modelo se sale de cuadro, pulsa «Restablecer vista».
       </p>
 
       <div className="viewer-actions">
@@ -137,6 +147,9 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
           Probar en mi espacio
         </button>
         <button className="btn" onClick={copyLink}>{copied ? '¡Enlace copiado!' : 'Copiar enlace para el celular'}</button>
+        {status === 'ready' && (
+          <button className="btn" onClick={resetView}>Restablecer vista</button>
+        )}
       </div>
 
       {status === 'ready' && (
@@ -153,8 +166,8 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
         <ol>
           <li>Pulsa «Probar en mi espacio» y acepta el permiso de cámara.</li>
           <li>Apunta el celular a la superficie (piso o pared, según el producto) y muévelo despacio para que la detecte.</li>
-          <li>Toca para colocar el mueble. Arrástralo para moverlo.</li>
-          <li>Según tu sistema, puedes rotarlo con dos dedos o cambiar su tamaño; no todas las plataformas lo permiten.</li>
+          <li>Toca para colocar el mueble a su tamaño real. Arrástralo para moverlo y usa dos dedos para rotarlo.</li>
+          <li>Si el objeto se desliza o pierde el seguimiento, muévete despacio alrededor o vuelve a colocarlo: el seguimiento es menos estable con poca luz o en superficies lisas y sin textura.</li>
         </ol>
       </details>
     </div>
