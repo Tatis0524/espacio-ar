@@ -6,7 +6,7 @@ const faqs = [
   ['¿Dónde se guardan mis favoritos?', 'En el LocalStorage de tu navegador. Si borras los datos del sitio o cambias de navegador, se pierden.'],
   ['¿Qué es ExploraAR?', 'La sección educativa de la app: fichas de ciencia, universo, historia y naturaleza con modelos 3D reales, un Laboratorio AR y un mini reto. Tu progreso se guarda también en LocalStorage.'],
   ['¿Por qué algunos elementos de ExploraAR dicen «modelo pendiente»?', 'Porque no encontramos un archivo GLB con licencia libre y de peso razonable. Preferimos ser honestos antes que mostrar modelos inventados; la guía docs/EXPLORA.md explica cómo agregarlos.'],
-  ['¿El tamaño en AR es real?', 'Depende del modelo y de la plataforma. Úsalo como referencia visual, no como medida exacta.'],
+  ['¿El tamaño en AR es real?', 'Es una referencia: los modelos grandes aparecen reducidos para caber en tu espacio (tope de 1,5 m) y puedes ajustar el tamaño pellizcando con dos dedos. No lo uses como medida exacta.'],
 ];
 
 const errors = [

@@ -70,7 +70,9 @@ con el motivo documentado en su campo `modelNote`:
    ```
 
 4. (Opcional) borra el campo `modelNote`.
-5. Ejecuta `npm run build` y comprueba que la ficha muestra el visor 3D.
+5. Ejecuta `node scripts/cap-ar-models.mjs` para revisar el tamaño en AR
+   (tope de 1,5 m; añade `--apply` si el nuevo modelo lo supera). Después
+   `npm run build` y comprueba que la ficha muestra el visor 3D.
 
 ## Probar la AR desde un celular
 
@@ -78,5 +80,30 @@ con el motivo documentado en su campo `modelNote`:
 2. Abre la página en el celular (Android con Chrome/ARCore o iPhone/iPad con Safari).
 3. Entra a un elemento con modelo y pulsa **«Probar en mi espacio»**.
 4. Acepta el permiso de cámara, apunta al piso, mueve el celular despacio hasta
-   detectar la superficie y toca para colocar el objeto (`ar-scale="fixed"` =
-   tamaño real).
+   detectar la superficie y toca para colocar el objeto.
+5. Arrastra con un dedo **encima** del objeto para moverlo (si arrastras fuera
+   de él, en lugar de moverse gira) y pellizca con dos dedos para agrandarlo o
+   reducirlo.
+
+## Tamaño de los modelos en AR
+
+- `ProductViewer` usa `ar-scale="auto"`: con eso el pellizco de dos dedos queda
+  activo en los tres modos AR (WebXR, Scene Viewer y Quick Look). Con
+  `ar-scale="fixed"`, model-viewer **desactiva** el redimensionado en los tres
+  (WebXR ignora el gesto, Scene Viewer recibe `resizable=false` y Quick Look
+  `allowsContentScaling=0`).
+- `scripts/cap-ar-models.mjs` mantiene la mayor dimensión de cada modelo por
+  debajo de **1,5 m** envolviendo la escena por defecto en un nodo raíz
+  `ar-cap-root` con escala uniforme. Solo se reescribe el JSON del glTF: los
+  `.bin` y las texturas no cambian, las animaciones y esqueletos siguen
+  funcionando (la escala uniforme se compone por encima de todo) y el visor 3D
+  de la página no cambia de aspecto porque se reencuadra solo. Sin argumentos
+  solo informa; con `--apply` modifica y verifica.
+- Modelos reducidos por el tope: `sofa-glam.glb` (2,19 → 1,50 m), `cannon_01`
+  (2,30 → 1,50 m), `Fox.glb` (154,7 → 1,50 m) y `Lantern.glb` (25,7 → 1,50 m).
+- **Unidades no métricas** (incumplen «1 unidad = 1 metro» de glTF): `Fox.glb`
+  está autorado en centímetros —su esqueleto mide ~154 u y un zorro real con
+  la cola tiene ~1,55 m— y `Lantern.glb` en decímetros —«old wooden street
+  light» de 25,66 u, es decir una farola de ~2,57 m—. En AR aparecerían de
+  155 m y 26 m; el tope de 1,5 m los normaliza a un tamaño creíble. La regla
+  **solo reduce**, nunca infla un modelo pequeño.

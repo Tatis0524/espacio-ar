@@ -3,6 +3,9 @@ import { explainNoAR } from '../utils/helpers.js';
 
 // Visor 3D real con <model-viewer>. La AR solo se activa mediante sesiones reales
 // (WebXR en Android/Chrome, Scene Viewer en Android, Quick Look en iOS). No se simula nada.
+// ar-scale="auto" mantiene activo el pellizco para redimensionar el objeto en AR:
+// con "fixed", model-viewer desactiva la escala en los tres modos AR (WebXR ignora
+// el gesto, Scene Viewer envía resizable=false y Quick Look allowsContentScaling=0).
 export default function ProductViewer({ src, alt, variantName, label, arPlacement = 'floor' }) {
   const ref = useRef(null);
   const [status, setStatus] = useState('loading'); // loading | ready | error
@@ -113,7 +116,7 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
             alt={alt}
             ar
             ar-modes="webxr scene-viewer quick-look"
-            ar-scale="fixed"
+            ar-scale="auto"
             ar-placement={arPlacement}
             camera-controls
             touch-action="pan-y"
@@ -166,7 +169,7 @@ export default function ProductViewer({ src, alt, variantName, label, arPlacemen
         <ol>
           <li>Pulsa «Probar en mi espacio» y acepta el permiso de cámara.</li>
           <li>Apunta el celular a la superficie (piso o pared, según el producto) y muévelo despacio para que la detecte.</li>
-          <li>Toca para colocar el mueble a su tamaño real. Arrástralo para moverlo y usa dos dedos para rotarlo.</li>
+          <li>Toca para colocarlo. Arrastra con un dedo <strong>encima</strong> del objeto para moverlo (si arrastras fuera de él, gira el objeto) y pellizca con dos dedos para agrandarlo o reducirlo.</li>
           <li>Si el objeto se desliza o pierde el seguimiento, muévete despacio alrededor o vuelve a colocarlo: el seguimiento es menos estable con poca luz o en superficies lisas y sin textura.</li>
         </ol>
       </details>

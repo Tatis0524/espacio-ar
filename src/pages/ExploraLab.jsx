@@ -10,7 +10,7 @@ const activity = [
   'Lee su ficha: qué es, de dónde viene, su licencia y sus curiosidades.',
   'Desde un celular compatible, pulsa «Probar en mi espacio».',
   'Acepta el permiso de cámara, apunta al piso y mueve el celular despacio hasta que se detecte la superficie.',
-  'Toca para colocarlo. Camina alrededor y compáralo con objetos reales de tu espacio.',
+  'Toca para colocarlo. Arrastra con un dedo encima del objeto para moverlo y pellizca con dos dedos para cambiar su tamaño. Camina alrededor y compáralo con objetos reales de tu espacio.',
   'Si pierde el seguimiento, vuelve a apuntar al piso: ayuda tener buena luz y superficies con algo de textura.',
 ];
 

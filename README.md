@@ -106,10 +106,11 @@ Fuentes, licencias y **cómo agregar un modelo pendiente**: [`docs/EXPLORA.md`](
 | 17 | Abrir «Corazón humano» | Panel «Modelo pendiente» con motivo; sin archivos inventados |
 | 18 | Completar el mini reto | Retroalimentación por pregunta, resultados, reintentar y mejor puntaje persistente |
 | 19 | Favoritar un elemento de ExploraAR | Aparece en Favoritos bajo «ExploraAR» y persiste al recargar |
+| 20 | AR en celular: mover y redimensionar | Arrastrar **dentro** del objeto lo mueve (fuera, gira); pellizcar con dos dedos cambia su tamaño; todo modelo aparece ≤1,5 m |
 
 ## Limitaciones conocidas
 
 - La AR real solo puede comprobarse en un celular físico; en computador la app muestra el 3D y avisa.
 - Al activar AR en Android/iOS (Scene Viewer / Quick Look), el sistema puede no conservar la variante de color elegida; depende de la plataforma.
-- El tamaño en AR es de referencia, no una medida exacta.
+- El tamaño en AR es de referencia: los modelos grandes aparecen limitados a 1,5 m (`scripts/cap-ar-models.mjs`) y puedes redimensionarlos pellizcando con dos dedos; no es una medida exacta.
 - Dos productos son solo ilustraciones por falta de modelo 3D gratuito.
