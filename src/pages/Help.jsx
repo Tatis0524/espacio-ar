@@ -4,6 +4,8 @@ const faqs = [
   ['¿Por qué algunos productos no tienen 3D?', 'Solo incluimos modelos GLB gratuitos con licencia verificada. Los productos sin modelo lo indican de forma clara.'],
   ['¿Los precios son reales?', 'No. Son ficticios y demostrativos; la app no vende ni procesa pagos.'],
   ['¿Dónde se guardan mis favoritos?', 'En el LocalStorage de tu navegador. Si borras los datos del sitio o cambias de navegador, se pierden.'],
+  ['¿Qué es ExploraAR?', 'La sección educativa de la app: fichas de ciencia, universo, historia y naturaleza con modelos 3D reales, un Laboratorio AR y un mini reto. Tu progreso se guarda también en LocalStorage.'],
+  ['¿Por qué algunos elementos de ExploraAR dicen «modelo pendiente»?', 'Porque no encontramos un archivo GLB con licencia libre y de peso razonable. Preferimos ser honestos antes que mostrar modelos inventados; la guía docs/EXPLORA.md explica cómo agregarlos.'],
   ['¿El tamaño en AR es real?', 'Depende del modelo y de la plataforma. Úsalo como referencia visual, no como medida exacta.'],
 ];
 

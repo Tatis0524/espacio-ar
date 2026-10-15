@@ -26,6 +26,7 @@ export default function Header() {
         <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Principal">
           <NavLink to="/" end className={link} onClick={close}>Inicio</NavLink>
           <NavLink to="/catalogo" className={link} onClick={close}>Catálogo</NavLink>
+          <NavLink to="/explora" className={link} onClick={close}>ExploraAR</NavLink>
           <NavLink to="/favoritos" className={link} onClick={close}>
             Favoritos{favorites.length > 0 && <span className="count">{favorites.length}</span>}
           </NavLink>

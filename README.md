@@ -71,6 +71,18 @@ Los modelos CC BY 4.0 exigen atribución: manténla (esta tabla y el pie de pág
 
 **Productos sin modelo:** la *mesa auxiliar* y la *estantería* no tienen GLB gratuito verificado. La app lo indica y ofrece un modelo de demostración (una silla) rotulado como «no es este producto». Para añadir uno: guarda el `.glb` en `public/models/` y pon su ruta en `model` dentro de `src/data/products.js`.
 
+## ExploraAR (sección educativa)
+
+Sección nativa de la app (menú **ExploraAR**, ruta `#/explora`) con:
+
+- **4 categorías**: Ciencia en 3D, Universo AR, Historia y cultura, Naturaleza y animales.
+- **22 fichas educativas** con buscador, filtros por categoría, favoritos y progreso local (LocalStorage).
+- **8 modelos 3D reales con AR** (Khronos CC0/CC BY, Poly Haven CC0, NASA/JPL vía Cesium); el resto indica honestamente «modelo pendiente» con su motivo.
+- **Laboratorio AR** (`#/explora/laboratorio`): catálogo visual, visor, ficha y actividad guiada «Mi primera experiencia AR».
+- **Mini reto**: 7 preguntas con retroalimentación, puntuación y mejor puntaje guardado.
+
+Fuentes, licencias y **cómo agregar un modelo pendiente**: [`docs/EXPLORA.md`](docs/EXPLORA.md).
+
 ## Pruebas manuales
 
 | # | Acción | Resultado esperado |
@@ -88,6 +100,12 @@ Los modelos CC BY 4.0 exigen atribución: manténla (esta tabla y el pie de pág
 | 11 | Lámpara en AR | Se coloca sobre una pared (`ar-placement="wall"`) si la plataforma lo admite |
 | 12 | Bloquear red y abrir un producto 3D | Panel de error con «Reintentar» |
 | 13 | Reducir la ventana a 390 px | Menú «Menú», sin scroll horizontal |
+| 14 | Abrir `#/explora` | Encabezado, 4 categorías, destacados, buscador, progreso, Laboratorio y mini reto |
+| 15 | Filtros o buscador en ExploraAR | La cuadrícula filtra; «sin resultados» ofrece limpiar |
+| 16 | Abrir un elemento con modelo | Visor 3D + AR + licencia; queda marcado «Explorado ✓» y suma al progreso |
+| 17 | Abrir «Corazón humano» | Panel «Modelo pendiente» con motivo; sin archivos inventados |
+| 18 | Completar el mini reto | Retroalimentación por pregunta, resultados, reintentar y mejor puntaje persistente |
+| 19 | Favoritar un elemento de ExploraAR | Aparece en Favoritos bajo «ExploraAR» y persiste al recargar |
 
 ## Limitaciones conocidas
 

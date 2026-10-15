@@ -153,4 +153,120 @@ model-viewer { width: 100%; height: 100%; --poster-color: transparent; backgroun
   .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--warm); border: 1px solid var(--line); border-radius: 0 0 16px 16px; padding: .6rem; box-shadow: var(--shadow); }
   .nav.open { display: flex; }
 }
+/* ============================ ExploraAR ============================ */
+/* Encabezado de la sección */
+.explora-hero .container { padding: 3rem 0 3.2rem; }
+.explora-intro { max-width: 70ch; }
+.explora-stat-pill { display: inline-flex; align-items: center; padding: .5rem 1rem; border-radius: 999px; background: var(--warm); border: 1px solid var(--line); font-size: .88rem; font-weight: 600; color: var(--dark); }
+
+/* Tarjetas de categoría */
+.cat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.1rem; }
+.cat-card { display: grid; gap: .4rem; justify-items: start; text-align: left; padding: 1.2rem; border: 1px solid var(--line); border-top: 4px solid var(--tint, var(--sage)); border-radius: var(--radius); background: var(--warm); box-shadow: var(--shadow); font: inherit; color: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.cat-card:hover { transform: translateY(-3px); }
+.cat-card.active { border-color: var(--dark); border-top-color: var(--tint, var(--sage)); }
+.cat-glyph { width: 48px; height: 48px; border-radius: 14px; background: var(--tint, var(--sage)); display: grid; place-items: center; font-size: 1.5rem; }
+.cat-name { font-weight: 700; color: var(--dark); font-family: Georgia, serif; font-size: 1.05rem; }
+.cat-desc { font-size: .88rem; color: var(--muted); }
+.cat-count { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dark); background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: .15rem .6rem; }
+
+/* Mosaico de las tarjetas educativas (gradiente + ícono, sin imágenes falsas) */
+.visual-tile { display: grid; place-items: center; background: linear-gradient(150deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, 0) 62%), var(--tint, #e0dacd); }
+.visual-glyph { font-size: clamp(3rem, 14vw, 4.2rem); line-height: 1; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .18)); }
+.badge-seen { top: .7rem; bottom: auto; background: var(--sage); color: var(--dark); }
+
+/* Chips de filtro */
+.chip-row { display: flex; flex-wrap: wrap; gap: .55rem; margin: .4rem 0 1rem; }
+.chip { display: inline-flex; align-items: center; gap: .35rem; border: 1.5px solid var(--line); background: var(--warm); border-radius: 999px; padding: .45rem .95rem; font: inherit; font-size: .9rem; font-weight: 600; color: var(--text); cursor: pointer; transition: background .15s, border-color .15s; }
+.chip:hover { border-color: var(--sage); }
+.chip.active { background: var(--dark); border-color: var(--dark); color: var(--warm); }
+
+/* Panel de progreso */
+.progress-panel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; background: var(--dark); color: var(--cream); border-radius: var(--radius); padding: 1.5rem; }
+.progress-panel h2 { color: var(--cream); margin-bottom: .2rem; }
+.progress-panel .muted { color: #c9d3c5; }
+.progress-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.2rem; flex: 1; min-width: 240px; }
+.stat strong { display: block; font-size: 1.8rem; font-family: Georgia, serif; color: var(--sage); line-height: 1.1; }
+.stat span { font-size: .84rem; color: #d7ded3; }
+
+/* Banner del Laboratorio */
+.lab-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; background: linear-gradient(140deg, #3d5949, var(--dark)); color: var(--cream); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow); }
+.lab-banner h2 { color: var(--cream); }
+.lab-banner p { margin: 0; max-width: 62ch; color: #e6ebe2; }
+.lab-banner .btn-primary { background: var(--sage); color: var(--dark); border-color: var(--sage); }
+.lab-banner .btn-primary:hover:not(:disabled) { background: #b3bf9d; }
+
+/* Listas de pasos dentro de paneles y del laboratorio.
+   Nota: los li son flex, así que los marcadores nativos no se renderizan;
+   se numeran con contadores CSS + círculos (sin depender de list-style). */
+.panel .steps, .lab-activity .steps { grid-template-columns: 1fr; list-style: none; padding-left: 0; counter-reset: paso; }
+.lab-activity .steps { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.panel .steps li, .lab-activity .steps li { counter-increment: paso; }
+.panel .steps li::before, .lab-activity .steps li::before {
+  content: counter(paso);
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: var(--dark);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+/* Panel pendiente de modelo */
+.pending-model { background: var(--warm); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.pending-tile { position: relative; aspect-ratio: 4/3.2; display: grid; place-content: center; justify-items: center; gap: .7rem; background: linear-gradient(150deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, 0) 62%), var(--tint, #e0dacd); }
+.pending-tile > span:first-child { font-size: clamp(3.4rem, 16vw, 5rem); line-height: 1; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .18)); }
+.pending-model-text { padding: 1.2rem; display: grid; gap: .6rem; justify-items: start; }
+.pending-model-text p { margin: 0; }
+
+/* Ficha educativa */
+.h-small { font-size: 1.15rem; margin-top: 1.2rem; }
+.item-facts { padding-left: 1.25rem; margin: .4rem 0 1rem; }
+.item-facts li { margin-bottom: .45rem; }
+.item-facts li::marker { color: var(--sage); }
+.model-credit { border-top: 1px dashed var(--line); padding-top: .8rem; margin-top: .4rem; }
+.model-credit a { word-break: break-word; }
+
+/* Laboratorio AR */
+.lab-picker { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.2rem 0 1.6rem; }
+.lab-chip { display: inline-flex; align-items: center; gap: .5rem; border: 1.5px solid var(--line); background: var(--warm); border-radius: 999px; padding: .5rem .95rem .5rem .5rem; font: inherit; font-size: .9rem; font-weight: 600; color: var(--text); cursor: pointer; box-shadow: var(--shadow); transition: transform .1s, border-color .15s; }
+.lab-chip:hover { transform: translateY(-2px); border-color: var(--sage); }
+.lab-chip > span:first-child { width: 30px; height: 30px; border-radius: 50%; background: var(--tint, var(--sage)); display: grid; place-items: center; font-size: 1rem; }
+.lab-chip.active { background: var(--dark); border-color: var(--dark); color: var(--warm); }
+.lab-activity { margin-top: 2.6rem; background: var(--warm); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+.lab-limits { margin-top: 1.2rem; }
+
+/* Mini reto */
+.quiz { background: var(--warm); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; max-width: 760px; box-shadow: var(--shadow); }
+.quiz-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.quiz-count { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.quiz-dots { display: inline-flex; gap: .3rem; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.dot.done { background: var(--sage); }
+.dot.current { background: var(--dark); }
+.quiz-question { margin: 1rem 0; }
+.quiz-options { list-style: none; display: grid; gap: .6rem; padding: 0; margin: 0 0 1rem; }
+.quiz-option { display: flex; align-items: center; gap: .75rem; width: 100%; text-align: left; padding: .85rem 1rem; border: 1.5px solid var(--line); background: var(--cream); border-radius: 12px; font: inherit; color: inherit; cursor: pointer; transition: border-color .15s, transform .1s; }
+.quiz-option:hover:not(:disabled) { border-color: var(--sage); transform: translateX(3px); }
+.quiz-option:disabled { cursor: default; opacity: 1; }
+.quiz-option.correct { background: #e3efd9; border-color: #6f9b5f; }
+.quiz-option.wrong { background: #f8e3e0; border-color: #a44a3f; }
+.quiz-letter { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--warm); border: 1px solid var(--line); font-weight: 700; font-size: .85rem; color: var(--dark); }
+.quiz-feedback { padding: .75rem 1rem; border-radius: 10px; margin-bottom: 1rem; font-size: .93rem; }
+.quiz-feedback.ok { background: #e3efd9; border-left: 4px solid var(--dark); }
+.quiz-feedback.no { background: #f8e3e0; border-left: 4px solid #a44a3f; }
+.quiz-actions { display: flex; gap: .7rem; flex-wrap: wrap; }
+.quiz-result { text-align: center; }
+.quiz-emoji { font-size: 3rem; margin: 0; }
+.quiz-score { font-size: 1.6rem; font-family: Georgia, serif; color: var(--dark); font-weight: 700; margin: .3rem 0; }
+.quiz-result .btn { margin-top: .6rem; }
+
+@media (max-width: 860px) {
+  .lab-banner, .progress-panel { flex-direction: column; align-items: flex-start; }
+  .quiz { padding: 1.2rem; }
+}
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
